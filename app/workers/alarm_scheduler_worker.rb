@@ -4,7 +4,6 @@ class AlarmSchedulerWorker
 
   def perform(user_ids, title)
     cur_time = Time.now
-    byebug
     user_ids.each do |cur_user_id|
       # create a notificaiton with current time
       # having user_id and alarm title

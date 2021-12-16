@@ -1,14 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
-  describe "GET /users" do
+RSpec.describe 'Users', type: :request do
+  describe 'GET /users' do
     before :each do
       @user_params = {
         name: 'testuser'
       }
     end
 
-    context 'users' do
+    context 'create users' do
+      it 'has missing name field' do
+        post '/api/v1/users/new', params: { id: 0, name: nil }
+        expect(response.status).not_to(eq(200))
+      end
+    end
+
+    context 'get users' do
       it 'Return list of user' do
         create(:user, id: 1)
         create(:user, id: 2)
@@ -25,7 +32,7 @@ RSpec.describe "Users", type: :request do
         user = create(:user, id: 1)
         get "/api/v1/users/#{user.id}"
         expect(response.status).to(eq(200))
-        expect(JSON.parse(response.body)["user"]["id"]).to(eq(user.id))
+        expect(JSON.parse(response.body)['user']['id']).to(eq(user.id))
       end
     end
 

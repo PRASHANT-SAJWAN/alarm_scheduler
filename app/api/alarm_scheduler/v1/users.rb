@@ -26,7 +26,6 @@ module AlarmScheduler
           desc 'Return user by id'
           get do
             @user = User.find_by_id(params[:id])
-            # p Notification.all.pluck(:user_id)
             present user: @user, notifications: @user.notifications
           end
         end

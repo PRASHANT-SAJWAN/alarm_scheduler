@@ -7,6 +7,8 @@ module AlarmScheduler
         # @time => 'HH-MM-SS' format string
         # @title => string
         def schedule(params)
+          raise ActiveRecord::RecordInvalid.new if params['time'].nil?
+
           time = params['time'].split(':')
           time = time[0].to_i * 3600 + time[1].to_i * 60 + time[2].to_i
           # create alarm
@@ -22,11 +24,11 @@ module AlarmScheduler
                   user_id: cur_user_id
                 )
               end
+
+              # update user after 'time' seconds
+              AlarmSchedulerWorker.perform_in(time.seconds, params['user_ids'], @alarm.title)
             end
           end
-          # update user after 'time' seconds
-          AlarmSchedulerWorker.perform_in(time.seconds, params['user_ids'], @alarm.title)
-          byebug
         end
       end
     end

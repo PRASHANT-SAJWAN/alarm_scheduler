@@ -33,8 +33,14 @@ gem 'grape_on_rails_routes'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
+gem 'simplecov', require: false, group: :test
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+
+group :test do
+  gem 'rspec-sidekiq'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
