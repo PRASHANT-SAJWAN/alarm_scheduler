@@ -40,6 +40,24 @@ module AlarmScheduler
             Helpers::Alarms.new.schedule(params)
           end
         end
+
+        resource :delete do
+          route_param :id do
+            desc 'delete this alarm'
+            get do
+              @alarm = Alarm.find(params[:id])
+              user_ids = @alarm.user_alarms.all.pluck(:user_id)
+              # tested in console
+              require 'sidekiq/api'
+              ss = Sidekiq::ScheduledSet.new
+              ss.each do |job|
+                # array check
+                job.delete if job.args.first == user_ids
+              end
+              Alarm.delete(params[:id])
+            end
+          end
+        end
       end
     end
   end

@@ -1,3 +1,4 @@
+require 'sidekiq/api'
 # schedule alarms
 class AlarmSchedulerWorker
   include Sidekiq::Worker
