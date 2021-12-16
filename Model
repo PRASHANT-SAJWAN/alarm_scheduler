@@ -1,0 +1,43 @@
+Model
+user (has_many user alarms)
+  user_id
+  name
+  # cntr -> instead insert new row in Notification table
+  # user_alarm_id -> maybe not req, can fetch all alarms by UserAlarm table directly using sql query
+
+alarms (has_many user alarms)
+  alarm_id
+  time
+  title
+  creator_id
+
+# [table joiner]
+user_alarm (belongs_to user, alarm)
+  id
+  user_id
+  alarm_id
+
+notif
+  id
+  user_id
+  time -> created_at
+  title -> of alarm
+
+# APIs
+create-alarm
+User creates an alarm and sends a POST req and update alarm_user table
+
+(mock) sidekiq for incrementing a column (noitif_ctr) of user indicating that it notified
+
+POST req params contains title[string], user_id[array] 
+DB entry for alarm and user_alarm is created and  alarm is created
+alarm_user contains user_id and alarm_id linking each other
+
+view-all-alarms
+  Based on title and we fetch all alarms from alarms table and show details
+  alarm id, title, time, list of users to notify (with id and name)
+
+API paths
+/create    POST   create alarm
+/view       GET  return all alarms with user lists
+/view/id  GET    return all alarms of that user
