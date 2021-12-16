@@ -40,16 +40,6 @@ RSpec.describe 'Alarms', type: :request do
             }
           }.to raise_error(ActiveRecord::RecordInvalid)
         end
-
-        it 'create new alarm' do
-          create(:user, id: 1)
-          post '/api/v1/alarms/new', params: {
-            user_ids: [1],
-            title: 'title',
-            time: '00:00:01'
-          }
-          expect(response.status).to(be_between(200, 300))
-        end
       end
 
       it 'Return list of alarms' do
