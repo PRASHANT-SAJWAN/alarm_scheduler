@@ -1,3 +1,4 @@
+require 'sidekiq/api'
 # wrapping Alarm functionality
 module AlarmScheduler
   module V1
@@ -47,8 +48,8 @@ module AlarmScheduler
             get do
               @alarm = Alarm.find(params[:id])
               user_ids = @alarm.user_alarms.all.pluck(:user_id)
-              # tested in console
-              require 'sidekiq/api'
+
+              # delete sidekiq scheduled alarms
               ss = Sidekiq::ScheduledSet.new
               ss.each do |job|
                 # array check
