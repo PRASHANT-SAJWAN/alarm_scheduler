@@ -53,7 +53,7 @@ module AlarmScheduler
               ss = Sidekiq::ScheduledSet.new
               ss.each do |job|
                 # array check
-                job.delete if job.args.first == user_ids
+                job.delete if job.jid == @alarm.jid
               end
               Alarm.delete(params[:id])
             end

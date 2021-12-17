@@ -24,18 +24,17 @@ notif
   title -> of alarm
 
 # APIs
-create-alarm
-User creates an alarm and sends a POST req and update alarm_user table
+create-user
+User with name and id is created
 
-(mock) sidekiq for incrementing a column (noitif_ctr) of user indicating that it notified
+create-alarm
+User creates an alarm and sends a POST req and add in user_alarm table
+
+# (mock) sidekiq for incrementing a column (noitif_ctr) of user indicating that it notified
 
 POST req params contains title[string], user_id[array] 
 DB entry for alarm and user_alarm is created and  alarm is created
 alarm_user contains user_id and alarm_id linking each other
-
-view-all-alarms
-  Based on title and we fetch all alarms from alarms table and show details
-  alarm id, title, time, list of users to notify (with id and name)
 
 API paths
 /create    POST   create alarm

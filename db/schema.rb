@@ -10,40 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_142830) do
+ActiveRecord::Schema.define(version: 2021_12_17_112412) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'alarms', force: :cascade do |t|
-    t.string 'title'
-    t.string 'time'
-    t.integer 'user_alarm_id'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "alarms", force: :cascade do |t|
+    t.string "title"
+    t.string "time"
+    t.integer "user_alarm_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "jid"
   end
 
-  create_table 'notifications', force: :cascade do |t|
-    t.string 'title'
-    t.integer 'user_id'
-    t.time 'time'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "notifications", force: :cascade do |t|
+    t.string "title"
+    t.integer "user_id"
+    t.time "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'user_alarms', force: :cascade do |t|
-    t.integer 'user_id'
-    t.integer 'alarm_id'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "user_alarms", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "alarm_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'cntr'
-    t.integer 'user_alarm_id'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.integer "cntr"
+    t.integer "user_alarm_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

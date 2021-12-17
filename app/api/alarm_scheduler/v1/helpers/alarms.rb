@@ -26,9 +26,9 @@ module AlarmScheduler
               end
 
               # update user after 'time' seconds
-              job = AlarmSchedulerWorker.perform_in(time.seconds, params['user_ids'], @alarm.title)
-              p job
-              # byebug
+              job_jid = AlarmSchedulerWorker.perform_in(time.seconds, params['user_ids'], @alarm.title)
+              @alarm.update(jid: job_jid)
+              job_jid
             end
           end
         end

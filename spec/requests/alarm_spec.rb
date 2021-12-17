@@ -42,25 +42,6 @@ RSpec.describe 'Alarms', type: :request do
         end
       end
 
-      # not working
-        # [reason: maybe sidekiq.inline is not letting process come in queue]
-      # context 'delete on /delete/:id route' do
-      #   require 'sidekiq/api'
-      #   ss = Sidekiq::ScheduledSet.new
-
-      #   it 'success' do
-      #     create(:user, id: 1)
-      #     post '/api/v1/alarms/new', params: {
-      #       user_ids: [1],
-      #       title: 'title',
-      #       time: '00:10:00'
-      #     }
-      #     expect(ss.size).to(eq(1))
-      #     post '/api/v1/alarms/1/delete'
-      #     expect(ss.size).to(eq(0))
-      #   end
-      # end
-
       it 'Return list of alarms' do
         create(:alarm)
         create(:alarm)
